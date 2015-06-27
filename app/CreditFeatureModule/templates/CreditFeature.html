@@ -1,0 +1,119 @@
+<!-- New Credit Modal -->
+<div class="modal fade" id="newCreditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <h4 class="modal-title" id="myModalLabel">New credit score</h4>
+         </div>
+         <div class="modal-body">
+              <div class="form-group">
+                <label for="creditName">Name</label>
+                <input type="text" required="true" class="form-control" ng-model="creditName" value="{{creditName}}" id="creditName" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label for="creditScore">Credit score</label>
+                <input type="number" min="0" max="999" required="true" class="form-control"  ng-model="creditScore" value="{{creditScore}}" id="crditScore" placeholder="Credit score">
+              </div>
+         </div>
+         <div class="modal-footer">
+               <div class="col-sm-6">
+                  <button type="button" class="btn btn-default btn-group-justified" id="close" data-dismiss="modal">Close</button>
+               </div>
+               <div class="col-sm-6">
+                  <button type="submit" id="update_data"  class="btn btn-primary btn-group-justified">Save changes</button>
+               </div>
+         </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Remove Credit Modal -->
+<div class="modal fade" id="removeCreditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <h4 class="modal-title" id="myModalLabel">Remove credit profile</h4>
+         </div>
+         <div class="modal-body">
+              <div class="form-group">
+                  <label for="creditName">Data selector</label>
+                  <select id="selectRemoveCreditProfile"  ng-model="creditRemove" value="{{creditRemove}}"  placeholder="Search" class="form-control"></select>
+              </div>
+         </div>
+
+         <div class="modal-footer">
+               <div class="col-sm-6">
+                  <button type="button" class="btn btn-default btn-group-justified" id="close" data-dismiss="modal">Close</button>
+               </div>
+               <div class="col-sm-6">
+                  <button type="submit" id="remove_data" ng-click="removeData(creditRemove)"  class="btn btn-primary btn-group-justified">Delete profile</button>
+               </div>
+         </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Update Credit Modal -->
+<div class="modal fade" id="updateCreditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <h4 class="modal-title" id="myModalLabel">Edit credit profile</h4>
+         </div>
+         <div class="modal-body">
+              <div class="form-group">
+                  <label for="creditName">Profile selector</label>
+                  <select id="selectUpdateCreditProfile" required="true"  ng-model="creditUpdateData" value="{{creditUpdateData}}"  placeholder="Search" class="form-control form-group"></select>
+
+                 <div  ng-show="(creditUpdateData) != '' " class="form-group">
+                   <label for="creditName">Name</label>
+                   <input type="text" required="true" class="form-control" ng-model="creditUpdateName" value="{{creditUpdateName}}" id="creditName" placeholder="Name">
+                 </div>
+                 <div ng-show="(creditUpdateData) != '' " class="form-group">
+                   <label for="creditScore">Credit score</label>
+                   <input type="number" min="0" max="999" required="true" class="form-control"  ng-model="creditUpdateScore" value="{{creditUpdateScore}}" id="crditScore" placeholder="Credit score">
+                 </div>
+              </div>
+         </div>
+
+         <div class="modal-footer">
+               <div class="col-sm-6">
+                  <button type="button" class="btn btn-default btn-group-justified" id="close" data-dismiss="modal">Close</button>
+               </div>
+               <div class="col-sm-6">
+                  <button type="submit" id="remove_data" ng-click="updateData(creditUpdateData,creditUpdateScore,creditUpdateName)"  class="btn btn-primary btn-group-justified">Save changes</button>
+               </div>
+         </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<div id="creditfeature" style="height: 400px;"></div>
+   <div class="col-sm-4">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-group-justified" data-toggle="modal" id="creditModalBtn" data-target="#newCreditModal">
+        New credit score <span class="glyphicon glyphicon-plus"></span>
+      </button>      
+   </div>
+   <div class="col-sm-4">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-group-justified" data-toggle="modal" id="creditUpdateModalBtn" data-target="#updateCreditModal">
+        Edit <span class="glyphicon glyphicon-pencil"></span>
+      </button>      
+   </div>
+    <div class="col-sm-4">
+      <button type="button"   class="btn btn-primary btn-group-justified btn-justified" data-toggle="modal" id="removeCreditModalBtn" data-target="#removeCreditModal">Remove data <span class="glyphicon glyphicon-remove "></span></button>
+    </div>
+</div>
+

@@ -1,0 +1,38 @@
+{
+  "name": "angular_firebase",
+  "version": "1.0.0",
+  "description": "Angular application wired up to a Firebase backend with 3 way data binding",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt watch:protractor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JG247/angular_firebase.git"
+  },
+  "author": "James Grant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JG247/angular_firebase/issues"
+  },
+  "homepage": "https://github.com/JG247/angular_firebase",
+  "devDependencies": {
+    "bower": "^1.4.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-protractor-runner": "^2.0.0",
+    "jasmine": "^2.3.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.12.36",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-ie-launcher": "^0.2.0",
+    "karma-jasmine": "^0.3.5",
+    "karma-opera-launcher": "^0.1.0",
+    "karma-safari-launcher": "^0.1.1",
+    "ng-annotate": "^1.0.0",
+    "protractor": "^2.1.0",
+    "r": "0.0.5"
+  }
+}
