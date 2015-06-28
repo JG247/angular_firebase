@@ -23,20 +23,22 @@ CreditFeatureModule.controller("CreditFeatureCtrl", [ "$scope", "$firebaseArray"
             for (var i = creditData.length - 1; i >= 0; i--) void 0 != creditData[i] && $("#selectRemoveCreditProfile").append("<option value=" + i + ">" + creditData[i][0] + " - " + creditData[i][1] + "</option>");
         });
     }), $scope.creditRemove = "", $scope.removeData = function(index) {
-        this.index = index, console.log(index);
-        var refRemove = new Firebase("https://angularjg.firebaseio.com/credit");
-        refRemove.once("value", function(data) {
-            this.data = data;
-            var indexNumber = parseInt(index), number = indexNumber, credArray = [];
-            if (data.val().length > 1) {
-                for (var i = 0; i < data.val().length; i++) i != number && credArray.push([ data.val()[i][0], data.val()[i][1] ]);
-                var refSet = new Firebase("https://angularjg.firebaseio.com");
-                refSet.once("value", function(data) {
-                    this.data = data, refSet.child("credit").set(credArray);
-                }), console.log(credArray), $("#removeCreditModal").modal("hide");
-            }
-        });
-    }, $("#updateCreditModal").on("shown.bs.modal", function(e) {
+        if ("" != $("select").val()) {
+            this.index = index, console.log(index);
+            var refRemove = new Firebase("https://angularjg.firebaseio.com/credit");
+            refRemove.once("value", function(data) {
+                this.data = data;
+                var indexNumber = parseInt(index), number = indexNumber, credArray = [];
+                if (data.val().length > 1) {
+                    for (var i = 0; i < data.val().length; i++) i != number && credArray.push([ data.val()[i][0], data.val()[i][1] ]);
+                    var refSet = new Firebase("https://angularjg.firebaseio.com");
+                    refSet.once("value", function(data) {
+                        this.data = data, refSet.child("credit").set(credArray);
+                    }), console.log(credArray), $("#removeCreditModal").modal("hide");
+                }
+            });
+        }
+    }, $scope.creditUpdateData = "", $("#updateCreditModal").on("shown.bs.modal", function(e) {
         $('select,input[type="text"],input[type="number"]').val(""), $("#selectUpdateCreditProfile").focus();
         var ref = new Firebase("https://angularjg.firebaseio.com/credit");
         ref.once("value", function(data) {
@@ -46,20 +48,22 @@ CreditFeatureModule.controller("CreditFeatureCtrl", [ "$scope", "$firebaseArray"
             $("#selectUpdateCreditProfile").append("<option value='' selected>--- Select a pofile to edit ---</option>");
             for (var i = creditUpdateData.length - 1; i >= 0; i--) void 0 != creditUpdateData[i] && $("#selectUpdateCreditProfile").append("<option value=" + i + ">" + creditUpdateData[i][0] + " - " + creditUpdateData[i][1] + "</option>");
         });
-    }), $scope.creditUpdateData = "", $scope.updateData = function(index, score, name) {
-        this.index = index, this.score = score, this.name = name, console.log(index + " " + score + " " + name);
-        var refUpdate = new Firebase("https://angularjg.firebaseio.com/credit");
-        refUpdate.once("value", function(data) {
-            this.data = data;
-            var indexNumber = parseInt(index), number = indexNumber, credArray = [];
-            if (data.val().length > 0) {
-                for (var i = 0; i < data.val().length; i++) i == number ? credArray.push([ name, score ]) : credArray.push([ data.val()[i][0], data.val()[i][1] ]);
-                var refSet = new Firebase("https://angularjg.firebaseio.com");
-                refSet.once("value", function(data) {
-                    this.data = data, refSet.child("credit").set(credArray);
-                }), console.log(credArray), $("#updateCreditModal").modal("hide");
-            }
-        });
+    }), $scope.updateData = function(index, score, name) {
+        if ("" != $('input[type="text"]').val() && "" != $('input[type="number"]').val() && "" != $("select").val()) {
+            this.index = index, this.score = score, this.name = name, console.log(index + " " + score + " " + name);
+            var refUpdate = new Firebase("https://angularjg.firebaseio.com/credit");
+            refUpdate.once("value", function(data) {
+                this.data = data;
+                var indexNumber = parseInt(index), number = indexNumber, credArray = [];
+                if (data.val().length > 0) {
+                    for (var i = 0; i < data.val().length; i++) i == number ? credArray.push([ name, score ]) : credArray.push([ data.val()[i][0], data.val()[i][1] ]);
+                    var refSet = new Firebase("https://angularjg.firebaseio.com");
+                    refSet.once("value", function(data) {
+                        this.data = data, refSet.child("credit").set(credArray);
+                    }), console.log(credArray), $("#updateCreditModal").modal("hide");
+                }
+            });
+        }
     }, ref.on("value", function(data) {
         var options = {
             chart: {

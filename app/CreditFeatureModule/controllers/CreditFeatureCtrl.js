@@ -43,38 +43,42 @@ var ref = new Firebase("https://angularjg.firebaseio.com/credit");
     $scope.creditRemove = "";
 
     $scope.removeData = function (index) {
-        this.index = index;
-        console.log(index);
-        var refRemove = new Firebase("https://angularjg.firebaseio.com/credit");
-        refRemove.once("value", function(data) {      
 
-            this.data = data;
-            var indexNumber = parseInt(index);
-            var number = indexNumber;
-            var credArray = [];
+        if ( $('select').val() != ""  ) {
+            this.index = index;
+            console.log(index);
+            var refRemove = new Firebase("https://angularjg.firebaseio.com/credit");
+            refRemove.once("value", function(data) {      
 
-            if ( data.val().length > 1  ) {
+                this.data = data;
+                var indexNumber = parseInt(index);
+                var number = indexNumber;
+                var credArray = [];
 
-                for (var i = 0; i < data.val().length; i++) {
-                    if ( i != number ) {
-                        credArray.push([ data.val()[i][0],data.val()[i][1] ]);
+                if ( data.val().length > 1  ) {
+
+                    for (var i = 0; i < data.val().length; i++) {
+                        if ( i != number ) {
+                            credArray.push([ data.val()[i][0],data.val()[i][1] ]);
+                        };
                     };
-                };
-                var refSet = new  Firebase("https://angularjg.firebaseio.com");
-                refSet.once("value", function(data) {  
-                    this.data = data;
-                    refSet.child('credit').set(credArray);        
-                });   
+                    var refSet = new  Firebase("https://angularjg.firebaseio.com");
+                    refSet.once("value", function(data) {  
+                        this.data = data;
+                        refSet.child('credit').set(credArray);        
+                    });   
 
-                console.log(credArray);
-                $('#removeCreditModal').modal('hide');
-                
-            } else {
+                    console.log(credArray);
+                    $('#removeCreditModal').modal('hide');
+                    
+                } else {
 
-            }        
-        });
+                }        
+            });
+        };
     }
 
+    $scope.creditUpdateData = "";
 
     $('#updateCreditModal').on('shown.bs.modal', function (e) {
         $('select,input[type="text"],input[type="number"]').val('');
@@ -95,44 +99,47 @@ var ref = new Firebase("https://angularjg.firebaseio.com/credit");
     });
 
 
-
-    $scope.creditUpdateData = "";
-
     $scope.updateData = function (index,score,name) {
-        this.index = index;
-        this.score = score;
-        this.name = name;
-        console.log(index + ' ' + score + ' ' + name);
-        var refUpdate = new Firebase("https://angularjg.firebaseio.com/credit");
-        refUpdate.once("value", function(data) {      
 
-            this.data = data;
-            var indexNumber = parseInt(index);
-            var number = indexNumber;
-            var credArray = [];
 
-            if ( data.val().length > 0  ) {
+        if ( $('input[type="text"]').val() != "" && $('input[type="number"]').val() != "" && $('select').val() != ""  ) {
+        
+            this.index = index;
+            this.score = score;
+            this.name = name;
+            console.log(index + ' ' + score + ' ' + name);
+            var refUpdate = new Firebase("https://angularjg.firebaseio.com/credit");
+            refUpdate.once("value", function(data) {      
 
-                for (var i = 0; i < data.val().length; i++) {
-                    if ( i == number ) {
-                        credArray.push([ name,score ]);
-                    } else {
-                        credArray.push([ data.val()[i][0],data.val()[i][1] ]);
-                    }
-                };
-                var refSet = new  Firebase("https://angularjg.firebaseio.com");
-                refSet.once("value", function(data) {  
-                    this.data = data;
-                    refSet.child('credit').set(credArray);        
-                });   
+                this.data = data;
+                var indexNumber = parseInt(index);
+                var number = indexNumber;
+                var credArray = [];
 
-                console.log(credArray);
-                $('#updateCreditModal').modal('hide');
-                
-            } else {
+                if ( data.val().length > 0  ) {
 
-            }        
-        });
+                    for (var i = 0; i < data.val().length; i++) {
+                        if ( i == number ) {
+                            credArray.push([ name,score ]);
+                        } else {
+                            credArray.push([ data.val()[i][0],data.val()[i][1] ]);
+                        }
+                    };
+                    var refSet = new  Firebase("https://angularjg.firebaseio.com");
+                    refSet.once("value", function(data) {  
+                        this.data = data;
+                        refSet.child('credit').set(credArray);        
+                    });   
+
+                    console.log(credArray);
+                    $('#updateCreditModal').modal('hide');
+                    
+                } else {
+
+                }        
+            });
+        };
+
     }
 
 
